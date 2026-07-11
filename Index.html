@@ -1,0 +1,958 @@
+<!DOCTYPE html>
+<html lang="lt">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover, maximum-scale=1" />
+<title>Treniruociu zurnalas</title>
+<meta name="theme-color" content="#17171B" />
+<meta name="apple-mobile-web-app-capable" content="yes" />
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+<meta name="apple-mobile-web-app-title" content="Zurnalas" />
+<link rel="manifest" href="data:application/manifest+json;base64,ewogICJuYW1lIjogIlRyZW5pcnVvY2l1IHp1cm5hbGFzIiwKICAic2hvcnRfbmFtZSI6ICJadXJuYWxhcyIsCiAgInN0YXJ0X3VybCI6ICIuIiwKICAiZGlzcGxheSI6ICJzdGFuZGFsb25lIiwKICAiYmFja2dyb3VuZF9jb2xvciI6ICIjRjZGNUYwIiwKICAidGhlbWVfY29sb3IiOiAiIzE3MTcxQiIsCiAgImljb25zIjogW3sic3JjIjogImRhdGE6aW1hZ2Uvc3ZnK3htbDtiYXNlNjQsUEhOMlp5QjRiV3h1Y3owaWFIUjBjRG92TDNkM2R5NTNNeTV2Y21jdk1qQXdNQzl6ZG1jaUlIWnBaWGRDYjNnOUlqQWdNQ0F4T0RBZ01UZ3dJajQ4Y21WamRDQjNhV1IwYUQwaU1UZ3dJaUJvWldsbmFIUTlJakU0TUNJZ2NuZzlJalF3SWlCbWFXeHNQU0lqTVRjeE56RkNJaTgrUEdOcGNtTnNaU0JqZUQwaU9UQWlJR041UFNJNU1DSWdjajBpTkRZaUlHWnBiR3c5SW01dmJtVWlJSE4wY205clpUMGlJMFpHUkRFd01DSWdjM1J5YjJ0bExYZHBaSFJvUFNJeE5DSXZQanh5WldOMElIZzlJalF3SWlCNVBTSTRNeUlnZDJsa2RHZzlJakV3TUNJZ2FHVnBaMmgwUFNJeE5DSWdjbmc5SWpRaUlHWnBiR3c5SWlOR1JrUXhNREFpTHo0OGNtVmpkQ0I0UFNJek5DSWdlVDBpTnpJaUlIZHBaSFJvUFNJeE1pSWdhR1ZwWjJoMFBTSXpOaUlnY25nOUlqTWlJR1pwYkd3OUlpTkdSa1F4TURBaUx6NDhjbVZqZENCNFBTSXhNelFpSUhrOUlqY3lJaUIzYVdSMGFEMGlNVElpSUdobGFXZG9kRDBpTXpZaUlISjRQU0l6SWlCbWFXeHNQU0lqUmtaRU1UQXdJaTgrUEM5emRtYysiLCAic2l6ZXMiOiAiYW55IiwgInR5cGUiOiAiaW1hZ2Uvc3ZnK3htbCJ9XQp9" />
+<link rel="icon" href="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAxODAgMTgwIj48cmVjdCB3aWR0aD0iMTgwIiBoZWlnaHQ9IjE4MCIgcng9IjQwIiBmaWxsPSIjMTcxNzFCIi8+PGNpcmNsZSBjeD0iOTAiIGN5PSI5MCIgcj0iNDYiIGZpbGw9Im5vbmUiIHN0cm9rZT0iI0ZGRDEwMCIgc3Ryb2tlLXdpZHRoPSIxNCIvPjxyZWN0IHg9IjQwIiB5PSI4MyIgd2lkdGg9IjEwMCIgaGVpZ2h0PSIxNCIgcng9IjQiIGZpbGw9IiNGRkQxMDAiLz48cmVjdCB4PSIzNCIgeT0iNzIiIHdpZHRoPSIxMiIgaGVpZ2h0PSIzNiIgcng9IjMiIGZpbGw9IiNGRkQxMDAiLz48cmVjdCB4PSIxMzQiIHk9IjcyIiB3aWR0aD0iMTIiIGhlaWdodD0iMzYiIHJ4PSIzIiBmaWxsPSIjRkZEMTAwIi8+PC9zdmc+" />
+<link rel="apple-touch-icon" href="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAxODAgMTgwIj48cmVjdCB3aWR0aD0iMTgwIiBoZWlnaHQ9IjE4MCIgcng9IjQwIiBmaWxsPSIjMTcxNzFCIi8+PGNpcmNsZSBjeD0iOTAiIGN5PSI5MCIgcj0iNDYiIGZpbGw9Im5vbmUiIHN0cm9rZT0iI0ZGRDEwMCIgc3Ryb2tlLXdpZHRoPSIxNCIvPjxyZWN0IHg9IjQwIiB5PSI4MyIgd2lkdGg9IjEwMCIgaGVpZ2h0PSIxNCIgcng9IjQiIGZpbGw9IiNGRkQxMDAiLz48cmVjdCB4PSIzNCIgeT0iNzIiIHdpZHRoPSIxMiIgaGVpZ2h0PSIzNiIgcng9IjMiIGZpbGw9IiNGRkQxMDAiLz48cmVjdCB4PSIxMzQiIHk9IjcyIiB3aWR0aD0iMTIiIGhlaWdodD0iMzYiIHJ4PSIzIiBmaWxsPSIjRkZEMTAwIi8+PC9zdmc+" />
+<style>
+  html, body { margin: 0; padding: 0; background: #F6F5F0; }
+  body { padding-top: env(safe-area-inset-top); }
+  #root { min-height: 100vh; }
+  #boot { font-family: monospace; color: #71706A; text-align: center; padding: 48px 16px; }
+</style>
+<script crossorigin src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
+<script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
+<script crossorigin src="https://unpkg.com/prop-types@15/prop-types.min.js"></script>
+<script crossorigin src="https://unpkg.com/recharts@2.12.7/umd/Recharts.min.js"></script>
+<script crossorigin src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js"></script>
+</head>
+<body>
+<div id="root"><div id="boot">Kraunama...</div></div>
+<script>
+(function(){
+  function ready(){ return window.React && window.ReactDOM && window.Recharts && window.lucide; }
+  function boot(){
+    if(!ready()){
+      document.getElementById('boot').textContent =
+        'Nepavyko uzkrauti bibliotekos. Patikrink interneta ir atnaujink puslapi.';
+      return;
+    }
+    try { (() => {
+  const {
+    ResponsiveContainer,
+    BarChart,
+    Bar,
+    LineChart,
+    Line,
+    XAxis,
+    YAxis,
+    Tooltip,
+    CartesianGrid
+  } = Recharts;
+  function makeIcon(name) {
+    return function Icon(props) {
+      const { size = 24, color = "currentColor", style, ...rest } = props || {};
+      const ref = React.useRef(null);
+      React.useEffect(() => {
+        if (!ref.current || !window.lucide || !window.lucide.icons) return;
+        const data = window.lucide.icons[name];
+        if (!data) return;
+        ref.current.innerHTML = "";
+        const svg = window.lucide.createElement(data);
+        svg.setAttribute("width", size);
+        svg.setAttribute("height", size);
+        svg.setAttribute("stroke", color);
+        ref.current.appendChild(svg);
+      }, [size, color]);
+      return React.createElement("span", {
+        ref,
+        style: { display: "inline-flex", lineHeight: 0, ...style || {} },
+        ...rest
+      });
+    };
+  }
+  const Plus = makeIcon("Plus");
+  const X = makeIcon("X");
+  const Check = makeIcon("Check");
+  const Trash2 = makeIcon("Trash2");
+  const Copy = makeIcon("Copy");
+  const Upload = makeIcon("Upload");
+  const Dumbbell = makeIcon("Dumbbell");
+  const History = makeIcon("History");
+  const Database = makeIcon("Database");
+  const Play = makeIcon("Play");
+  const ChevronDown = makeIcon("ChevronDown");
+  const ChevronUp = makeIcon("ChevronUp");
+  const Flag = makeIcon("Flag");
+  const TrendingUp = makeIcon("TrendingUp");
+  const C = {
+    paper: "#F6F5F0",
+    card: "#FFFFFF",
+    ink: "#17171B",
+    mut: "#71706A",
+    line: "#DCDAD1",
+    hi: "#FFD100",
+    green: "#2E9E44",
+    yellow: "#DFA700",
+    blue: "#2456C4",
+    red: "#D6382C"
+  };
+  const F = {
+    disp: "'Barlow Condensed', 'Arial Narrow', sans-serif",
+    body: "'Barlow', system-ui, sans-serif",
+    mono: "'IBM Plex Mono', 'Courier New', monospace"
+  };
+  const TYPES = ["J\u0117ga", "Hyrox", "B\u0117gimas", "Kita"];
+  const SEED = [
+    "Prit\u016Bpimai (back squat)",
+    "Priekiniai prit\u016Bpimai",
+    "Mirties trauka",
+    "Rumuni\u0161ka mirties trauka",
+    "Spaudimas gulint",
+    "Spaudimas stovint (OHP)",
+    "Prisitraukimai",
+    "Irklavimas su \u0161tanga",
+    "Vienos rankos irklavimas",
+    "\u012Et\u016Bpstai einant (walking lunges)",
+    "Bulgari\u0161ki \u012Ft\u016Bpstai",
+    "Hip thrust",
+    "Koj\u0173 spaudimas (leg press)",
+    "Farmer's carry",
+    "Wall ball",
+    "Sled push (rog\u0117s)",
+    "Sled pull",
+    "Burpee broad jump",
+    "SkiErg",
+    "Irklavimo ergometras (row)",
+    "Kettlebell swing",
+    "Planka / core"
+  ];
+  const STORE_KEY = "gymlog_v1";
+  const uid = () => typeof crypto !== "undefined" && crypto.randomUUID ? crypto.randomUUID() : Date.now().toString(36) + Math.random().toString(36).slice(2, 8);
+  const num = (s) => {
+    if (s === null || s === void 0) return null;
+    const v = parseFloat(String(s).replace(",", "."));
+    return Number.isNaN(v) ? null : v;
+  };
+  const fmtDate = (iso) => {
+    try {
+      return new Date(iso).toLocaleDateString("lt-LT", {
+        weekday: "short",
+        month: "2-digit",
+        day: "2-digit"
+      });
+    } catch (e) {
+      return iso ? iso.slice(0, 10) : "";
+    }
+  };
+  const fmtKg = (n) => Math.round(n).toLocaleString("lt-LT");
+  const tonnage = (w) => {
+    let t = 0;
+    (w.exercises || []).forEach(
+      (ex) => (ex.sets || []).forEach((s) => {
+        const kg = num(s.kg), r = num(s.reps);
+        if (kg && r) t += kg * r;
+      })
+    );
+    return t;
+  };
+  const mondayOf = (d) => {
+    const x = new Date(d);
+    const day = (x.getDay() + 6) % 7;
+    x.setHours(0, 0, 0, 0);
+    x.setDate(x.getDate() - day);
+    return x;
+  };
+  const rpeColor = (v) => {
+    const n = num(v);
+    if (n === null) return C.mut;
+    if (n <= 6) return C.green;
+    if (n <= 7) return C.yellow;
+    if (n <= 8) return C.blue;
+    if (n <= 9) return C.red;
+    return C.ink;
+  };
+  const setsLine = (sets) => (sets || []).filter((s) => s.kg || s.reps).map((s) => `${s.kg || "\u2013"}\xD7${s.reps || "\u2013"}`).join(" \xB7 ");
+  const e1rm = (kg, reps) => reps > 0 ? kg * (1 + reps / 30) : kg;
+  const weekLabel = (d) => {
+    const m = mondayOf(d);
+    return `${String(m.getMonth() + 1).padStart(2, "0")}-${String(m.getDate()).padStart(2, "0")}`;
+  };
+  function PlateDot({ v, size = 10 }) {
+    return /* @__PURE__ */ React.createElement(
+      "span",
+      {
+        style: {
+          display: "inline-block",
+          width: size,
+          height: size,
+          borderRadius: "50%",
+          background: rpeColor(v),
+          verticalAlign: "middle"
+        }
+      }
+    );
+  }
+  function PlatePicker({ value, onChange }) {
+    const opts = [6, 7, 8, 9, 10];
+    return /* @__PURE__ */ React.createElement("div", { className: "flex justify-between gap-1" }, opts.map((v) => {
+      const sel = num(value) === v;
+      const col = rpeColor(v);
+      return /* @__PURE__ */ React.createElement(
+        "button",
+        {
+          key: v,
+          onClick: () => onChange(sel ? "" : String(v)),
+          className: "flex flex-col items-center gap-1",
+          style: { background: "transparent", border: "none", padding: 2, cursor: "pointer" },
+          "aria-label": `RPE ${v}`
+        },
+        /* @__PURE__ */ React.createElement(
+          "span",
+          {
+            style: {
+              width: 46,
+              height: 46,
+              borderRadius: "50%",
+              border: `5px solid ${col}`,
+              background: sel ? col : C.card,
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center",
+              boxShadow: sel ? `0 0 0 2px ${C.ink}` : "none"
+            }
+          },
+          /* @__PURE__ */ React.createElement(
+            "span",
+            {
+              style: {
+                width: 9,
+                height: 9,
+                borderRadius: "50%",
+                background: sel ? C.card : col
+              }
+            }
+          )
+        ),
+        /* @__PURE__ */ React.createElement("span", { style: { fontFamily: F.mono, fontSize: 12, color: sel ? C.ink : C.mut } }, v)
+      );
+    }));
+  }
+  function Tag({ children }) {
+    return /* @__PURE__ */ React.createElement(
+      "span",
+      {
+        style: {
+          fontFamily: F.disp,
+          fontWeight: 600,
+          fontSize: 14,
+          letterSpacing: "0.06em",
+          textTransform: "uppercase",
+          background: C.hi,
+          color: C.ink,
+          padding: "2px 8px",
+          borderRadius: 3
+        }
+      },
+      children
+    );
+  }
+  function Rule() {
+    return /* @__PURE__ */ React.createElement("div", { style: { borderTop: `1px solid ${C.line}` } });
+  }
+  function Confirm2({ label, confirmLabel = "Tikrai?", onConfirm, danger = true, icon = null }) {
+    const [arm, setArm] = React.useState(false);
+    React.useEffect(() => {
+      if (!arm) return;
+      const t = setTimeout(() => setArm(false), 3e3);
+      return () => clearTimeout(t);
+    }, [arm]);
+    return /* @__PURE__ */ React.createElement(
+      "button",
+      {
+        onClick: () => arm ? (setArm(false), onConfirm()) : setArm(true),
+        className: "flex items-center gap-1",
+        style: {
+          fontFamily: F.disp,
+          fontWeight: 600,
+          fontSize: 14,
+          letterSpacing: "0.04em",
+          textTransform: "uppercase",
+          color: arm ? C.card : danger ? C.red : C.mut,
+          background: arm ? C.red : "transparent",
+          border: `1px solid ${arm ? C.red : C.line}`,
+          borderRadius: 6,
+          padding: "6px 10px",
+          cursor: "pointer"
+        }
+      },
+      icon,
+      arm ? confirmLabel : label
+    );
+  }
+  function SetRow({ idx, set, onChange, onRemove }) {
+    const cell = {
+      fontFamily: F.mono,
+      fontSize: 17,
+      textAlign: "center",
+      background: "transparent",
+      border: "none",
+      borderBottom: `1.5px solid ${C.line}`,
+      borderRadius: 0,
+      color: C.ink,
+      width: "100%",
+      padding: "8px 2px",
+      minHeight: 42
+    };
+    return /* @__PURE__ */ React.createElement("div", { className: "grid items-center gap-2 py-1", style: { gridTemplateColumns: "18px 1fr 1fr 1fr 26px" } }, /* @__PURE__ */ React.createElement("span", { style: { fontFamily: F.mono, fontSize: 12, color: C.mut } }, idx + 1), /* @__PURE__ */ React.createElement(
+      "input",
+      {
+        style: cell,
+        inputMode: "decimal",
+        placeholder: "kg",
+        value: set.kg,
+        onChange: (e) => onChange("kg", e.target.value)
+      }
+    ), /* @__PURE__ */ React.createElement(
+      "input",
+      {
+        style: cell,
+        inputMode: "numeric",
+        placeholder: "kart.",
+        value: set.reps,
+        onChange: (e) => onChange("reps", e.target.value)
+      }
+    ), /* @__PURE__ */ React.createElement(
+      "input",
+      {
+        style: { ...cell, borderBottomColor: rpeColor(set.rpe) },
+        inputMode: "decimal",
+        placeholder: "RPE",
+        value: set.rpe,
+        onChange: (e) => onChange("rpe", e.target.value)
+      }
+    ), /* @__PURE__ */ React.createElement(
+      "button",
+      {
+        onClick: onRemove,
+        "aria-label": "\u0160alinti serij\u0105",
+        style: { background: "transparent", border: "none", color: C.mut, cursor: "pointer", padding: 4 }
+      },
+      /* @__PURE__ */ React.createElement(X, { size: 16 })
+    ));
+  }
+  function ExerciseCard({ ex, prev, onSet, onAddSet, onRemoveSet, onRemove }) {
+    return /* @__PURE__ */ React.createElement("div", { style: { background: C.card, border: `1px solid ${C.line}`, borderRadius: 10, padding: "12px 14px" } }, /* @__PURE__ */ React.createElement("div", { className: "flex items-start justify-between gap-2" }, /* @__PURE__ */ React.createElement("div", null, /* @__PURE__ */ React.createElement("div", { style: { fontFamily: F.disp, fontWeight: 600, fontSize: 20, lineHeight: 1.1, textTransform: "uppercase", letterSpacing: "0.02em" } }, ex.name), /* @__PURE__ */ React.createElement("div", { style: { fontFamily: F.mono, fontSize: 12, color: C.mut, marginTop: 3 } }, prev ? /* @__PURE__ */ React.createElement(React.Fragment, null, "Praeitas (", fmtDate(prev.date).slice(-5), "): ", setsLine(prev.sets) || "\u2014") : "Pirmas kartas \u2014 nauja atskaita")), /* @__PURE__ */ React.createElement(
+      "button",
+      {
+        onClick: onRemove,
+        "aria-label": "\u0160alinti pratim\u0105",
+        style: { background: "transparent", border: "none", color: C.mut, cursor: "pointer", padding: 4 }
+      },
+      /* @__PURE__ */ React.createElement(X, { size: 18 })
+    )), /* @__PURE__ */ React.createElement("div", { className: "grid gap-2 mt-2", style: { gridTemplateColumns: "18px 1fr 1fr 1fr 26px" } }, /* @__PURE__ */ React.createElement("span", null), ["KG", "KART.", "RPE"].map((h) => /* @__PURE__ */ React.createElement("span", { key: h, style: { fontFamily: F.disp, fontSize: 12, fontWeight: 600, letterSpacing: "0.08em", color: C.mut, textAlign: "center" } }, h)), /* @__PURE__ */ React.createElement("span", null)), ex.sets.map((s, i) => /* @__PURE__ */ React.createElement(
+      SetRow,
+      {
+        key: s.id,
+        idx: i,
+        set: s,
+        onChange: (f, v) => onSet(s.id, f, v),
+        onRemove: () => onRemoveSet(s.id)
+      }
+    )), /* @__PURE__ */ React.createElement(
+      "button",
+      {
+        onClick: onAddSet,
+        className: "w-full mt-2 flex items-center justify-center gap-1",
+        style: {
+          fontFamily: F.disp,
+          fontWeight: 600,
+          fontSize: 15,
+          letterSpacing: "0.05em",
+          textTransform: "uppercase",
+          color: C.ink,
+          background: C.paper,
+          border: `1px dashed ${C.line}`,
+          borderRadius: 6,
+          padding: "9px 0",
+          cursor: "pointer"
+        }
+      },
+      /* @__PURE__ */ React.createElement(Plus, { size: 15 }),
+      " Serija"
+    ));
+  }
+  function AddExercise({ library, onPick }) {
+    const [q, setQ] = React.useState("");
+    const query = q.trim().toLowerCase();
+    const matches = query ? library.filter((n) => n.toLowerCase().includes(query)).slice(0, 6) : library.slice(0, 6);
+    const exact = library.some((n) => n.toLowerCase() === query);
+    return /* @__PURE__ */ React.createElement("div", { style: { background: C.card, border: `1px solid ${C.line}`, borderRadius: 10, padding: "12px 14px" } }, /* @__PURE__ */ React.createElement(
+      "input",
+      {
+        value: q,
+        onChange: (e) => setQ(e.target.value),
+        placeholder: "Ie\u0161koti ar sukurti pratim\u0105\u2026",
+        style: {
+          width: "100%",
+          fontFamily: F.body,
+          fontSize: 16,
+          background: C.paper,
+          border: `1px solid ${C.line}`,
+          borderRadius: 6,
+          padding: "10px 12px",
+          color: C.ink
+        }
+      }
+    ), /* @__PURE__ */ React.createElement("div", { className: "flex flex-col mt-2" }, matches.map((n) => /* @__PURE__ */ React.createElement(
+      "button",
+      {
+        key: n,
+        onClick: () => {
+          onPick(n, false);
+          setQ("");
+        },
+        className: "text-left",
+        style: {
+          fontFamily: F.body,
+          fontSize: 15,
+          color: C.ink,
+          background: "transparent",
+          border: "none",
+          borderBottom: `1px solid ${C.line}`,
+          padding: "10px 4px",
+          cursor: "pointer"
+        }
+      },
+      n
+    )), query.length > 1 && !exact && /* @__PURE__ */ React.createElement(
+      "button",
+      {
+        onClick: () => {
+          onPick(q.trim(), true);
+          setQ("");
+        },
+        className: "text-left flex items-center gap-1",
+        style: {
+          fontFamily: F.body,
+          fontSize: 15,
+          fontWeight: 600,
+          color: C.ink,
+          background: "transparent",
+          border: "none",
+          padding: "10px 4px",
+          cursor: "pointer"
+        }
+      },
+      /* @__PURE__ */ React.createElement(Plus, { size: 15 }),
+      " Sukurti \u201E",
+      q.trim(),
+      "\u201C"
+    )));
+  }
+  function TreniruociuZurnalas() {
+    const [loaded, setLoaded] = React.useState(false);
+    const [storageOk, setStorageOk] = React.useState(true);
+    const [workouts, setWorkouts] = React.useState([]);
+    const [custom, setCustom] = React.useState([]);
+    const [draft, setDraft] = React.useState(null);
+    const [view, setView] = React.useState("log");
+    const [pickedType, setPickedType] = React.useState(TYPES[0]);
+    const [finishing, setFinishing] = React.useState(false);
+    const [expanded, setExpanded] = React.useState(null);
+    const [toast, setToast] = React.useState("");
+    const [importText, setImportText] = React.useState("");
+    const [importMsg, setImportMsg] = React.useState("");
+    const [copied, setCopied] = React.useState(false);
+    const [exSel, setExSel] = React.useState("");
+    const exportRef = React.useRef(null);
+    const saveTimer = React.useRef(null);
+    React.useEffect(() => {
+      (async () => {
+        try {
+          const raw = localStorage.getItem(STORE_KEY);
+          if (raw) {
+            const d = JSON.parse(raw);
+            setWorkouts(Array.isArray(d.workouts) ? d.workouts : []);
+            setCustom(Array.isArray(d.customExercises) ? d.customExercises : []);
+            setDraft(d.draft || null);
+          }
+        } catch (e) {
+        } finally {
+          setLoaded(true);
+        }
+      })();
+    }, []);
+    React.useEffect(() => {
+      if (!loaded || !storageOk) return;
+      if (saveTimer.current) clearTimeout(saveTimer.current);
+      saveTimer.current = setTimeout(async () => {
+        try {
+          localStorage.setItem(
+            STORE_KEY,
+            JSON.stringify({ workouts, customExercises: custom, draft, savedAt: (/* @__PURE__ */ new Date()).toISOString() })
+          );
+        } catch (e) {
+          console.error("Saugojimo klaida:", e);
+        }
+      }, 700);
+      return () => saveTimer.current && clearTimeout(saveTimer.current);
+    }, [workouts, custom, draft, loaded, storageOk]);
+    const flash = (msg) => {
+      setToast(msg);
+      setTimeout(() => setToast(""), 2200);
+    };
+    const library = React.useMemo(() => {
+      const recent = [];
+      [...workouts].sort((a, b) => a.date < b.date ? 1 : -1).forEach((w) => (w.exercises || []).forEach((ex) => {
+        if (!recent.includes(ex.name)) recent.push(ex.name);
+      }));
+      const rest = [.../* @__PURE__ */ new Set([...custom, ...SEED])].filter((n) => !recent.includes(n)).sort((a, b) => a.localeCompare(b, "lt"));
+      return [...recent, ...rest];
+    }, [workouts, custom]);
+    const prevFor = (name) => {
+      const sorted = [...workouts].sort((a, b) => a.date < b.date ? 1 : -1);
+      for (const w of sorted) {
+        const ex = (w.exercises || []).find((e) => e.name === name);
+        if (ex && ex.sets && ex.sets.some((s) => s.kg || s.reps)) return { date: w.date, sets: ex.sets };
+      }
+      return null;
+    };
+    const startWorkout = () => {
+      setDraft({ id: uid(), type: pickedType, date: (/* @__PURE__ */ new Date()).toISOString(), durationMin: "", srpe: "", notes: "", exercises: [] });
+      setFinishing(false);
+    };
+    const addExercise = (name, isNew) => {
+      if (isNew && !custom.includes(name) && !SEED.includes(name)) setCustom((c) => [...c, name]);
+      const prev = prevFor(name);
+      const last = prev && prev.sets.length ? prev.sets[prev.sets.length - 1] : null;
+      const first = { id: uid(), kg: last ? last.kg : "", reps: last ? last.reps : "", rpe: "" };
+      setDraft((d) => ({ ...d, exercises: [...d.exercises, { id: uid(), name, sets: [first] }] }));
+    };
+    const mutateEx = (exId, fn) => setDraft((d) => ({ ...d, exercises: d.exercises.map((e) => e.id === exId ? fn(e) : e) }));
+    const setField = (exId, setId, field, val) => mutateEx(exId, (e) => ({ ...e, sets: e.sets.map((s) => s.id === setId ? { ...s, [field]: val } : s) }));
+    const addSet = (exId) => mutateEx(exId, (e) => {
+      const last = e.sets[e.sets.length - 1];
+      return { ...e, sets: [...e.sets, { id: uid(), kg: last ? last.kg : "", reps: last ? last.reps : "", rpe: last ? last.rpe : "" }] };
+    });
+    const removeSet = (exId, setId) => mutateEx(exId, (e) => ({ ...e, sets: e.sets.filter((s) => s.id !== setId) }));
+    const removeExercise = (exId) => setDraft((d) => ({ ...d, exercises: d.exercises.filter((e) => e.id !== exId) }));
+    const cancelWorkout = () => {
+      setDraft(null);
+      setFinishing(false);
+    };
+    const openFinish = () => {
+      const mins = Math.max(1, Math.round((Date.now() - new Date(draft.date).getTime()) / 6e4));
+      setDraft((d) => ({ ...d, durationMin: d.durationMin || String(mins) }));
+      setFinishing(true);
+    };
+    const saveWorkout = () => {
+      const clean = {
+        ...draft,
+        exercises: draft.exercises.map((e) => ({ ...e, sets: e.sets.filter((s) => s.kg || s.reps || s.rpe) })).filter((e) => e.sets.length > 0)
+      };
+      setWorkouts((ws) => [clean, ...ws]);
+      setDraft(null);
+      setFinishing(false);
+      setExpanded(clean.id);
+      setView("history");
+      flash("\u012Era\u0161yta");
+    };
+    const deleteWorkout = (id) => setWorkouts((ws) => ws.filter((w) => w.id !== id));
+    const week = React.useMemo(() => {
+      const from = mondayOf(/* @__PURE__ */ new Date());
+      const ws = workouts.filter((w) => new Date(w.date) >= from);
+      const t = ws.reduce((a, w) => a + tonnage(w), 0);
+      const rpes = ws.map((w) => num(w.srpe)).filter((v) => v !== null);
+      const avg = rpes.length ? rpes.reduce((a, b) => a + b, 0) / rpes.length : null;
+      return { count: ws.length, tonnage: t, avgRpe: avg };
+    }, [workouts]);
+    const weeklyData = React.useMemo(() => {
+      const map = /* @__PURE__ */ new Map();
+      workouts.forEach((w) => {
+        const key = mondayOf(w.date).getTime();
+        if (!map.has(key)) map.set(key, { key, label: weekLabel(w.date), tonnage: 0, load: 0, n: 0 });
+        const row = map.get(key);
+        row.tonnage += Math.round(tonnage(w));
+        const s = num(w.srpe), m = num(w.durationMin);
+        if (s && m) row.load += Math.round(s * m);
+        row.n += 1;
+      });
+      return [...map.values()].sort((a, b) => a.key - b.key).slice(-10);
+    }, [workouts]);
+    const exNames = React.useMemo(() => {
+      const freq = /* @__PURE__ */ new Map();
+      workouts.forEach((w) => (w.exercises || []).forEach((ex) => {
+        const has = (ex.sets || []).some((s) => num(s.kg) && num(s.reps));
+        if (has) freq.set(ex.name, (freq.get(ex.name) || 0) + 1);
+      }));
+      return [...freq.entries()].sort((a, b) => b[1] - a[1]).map(([n]) => n);
+    }, [workouts]);
+    const exActive = exSel || exNames[0] || "";
+    const exSeries = React.useMemo(() => {
+      if (!exActive) return [];
+      return [...workouts].sort((a, b) => a.date > b.date ? 1 : -1).map((w) => {
+        const ex = (w.exercises || []).find((e) => e.name === exActive);
+        if (!ex) return null;
+        let best = 0, top = 0;
+        (ex.sets || []).forEach((s) => {
+          const kg = num(s.kg), r = num(s.reps);
+          if (kg && r) {
+            best = Math.max(best, e1rm(kg, r));
+            top = Math.max(top, kg);
+          }
+        });
+        if (!best) return null;
+        return { label: fmtDate(w.date).slice(-5), e1RM: Math.round(best * 10) / 10, kg: top };
+      }).filter(Boolean).slice(-15);
+    }, [workouts, exActive]);
+    const exportJson = React.useMemo(
+      () => JSON.stringify(
+        { app: "treniruociu-zurnalas", version: 1, exportedAt: (/* @__PURE__ */ new Date()).toISOString(), workouts, customExercises: custom },
+        null,
+        2
+      ),
+      [workouts, custom]
+    );
+    const copyExport = async () => {
+      try {
+        await navigator.clipboard.writeText(exportJson);
+        setCopied(true);
+      } catch (e) {
+        if (exportRef.current) {
+          exportRef.current.select();
+          try {
+            document.execCommand("copy");
+            setCopied(true);
+          } catch (e2) {
+            setCopied(false);
+          }
+        }
+      }
+      setTimeout(() => setCopied(false), 2500);
+    };
+    const doImport = () => {
+      try {
+        const d = JSON.parse(importText);
+        const inc = Array.isArray(d.workouts) ? d.workouts : [];
+        const incCustom = Array.isArray(d.customExercises) ? d.customExercises : [];
+        const ids = new Set(workouts.map((w) => w.id));
+        const fresh = inc.filter((w) => w && w.id && !ids.has(w.id));
+        setWorkouts((ws) => [...fresh, ...ws]);
+        setCustom((c) => [.../* @__PURE__ */ new Set([...c, ...incCustom])]);
+        setImportMsg(`Importuota: +${fresh.length} treniruo\u010Di\u0173.`);
+        setImportText("");
+      } catch (e) {
+        setImportMsg("Nepavyko nuskaityti \u2014 patikrink, ar \u012Fklijuotas visas JSON.");
+      }
+    };
+    const btnPrimary = {
+      fontFamily: F.disp,
+      fontWeight: 700,
+      fontSize: 19,
+      letterSpacing: "0.06em",
+      textTransform: "uppercase",
+      background: C.ink,
+      color: C.paper,
+      border: "none",
+      borderRadius: 8,
+      padding: "15px 18px",
+      cursor: "pointer",
+      display: "flex",
+      alignItems: "center",
+      justifyContent: "center",
+      gap: 8,
+      width: "100%"
+    };
+    const renderStart = () => /* @__PURE__ */ React.createElement("div", { className: "flex flex-col gap-4" }, /* @__PURE__ */ React.createElement("div", null, /* @__PURE__ */ React.createElement("div", { style: { fontFamily: F.mono, fontSize: 12, color: C.mut, letterSpacing: "0.08em" } }, (/* @__PURE__ */ new Date()).toLocaleDateString("lt-LT", { weekday: "long", month: "long", day: "numeric" }).toUpperCase()), /* @__PURE__ */ React.createElement("h1", { style: { fontFamily: F.disp, fontWeight: 700, fontSize: 44, lineHeight: 0.95, textTransform: "uppercase", margin: "6px 0 0" } }, "Treniruo\u010Di\u0173", /* @__PURE__ */ React.createElement("br", null), "\u017Eurnalas")), /* @__PURE__ */ React.createElement(
+      "div",
+      {
+        className: "flex items-center justify-between",
+        style: { fontFamily: F.mono, fontSize: 13, color: C.ink, borderTop: `2px solid ${C.ink}`, borderBottom: `1px solid ${C.line}`, padding: "8px 2px" }
+      },
+      /* @__PURE__ */ React.createElement("span", null, "\u0160I SAVAIT\u0116"),
+      /* @__PURE__ */ React.createElement("span", null, week.count, " tren. \xB7 ", fmtKg(week.tonnage), " kg", week.avgRpe ? /* @__PURE__ */ React.createElement(React.Fragment, null, " \xB7 \xD8 RPE ", week.avgRpe.toFixed(1)) : null)
+    ), /* @__PURE__ */ React.createElement("div", null, /* @__PURE__ */ React.createElement("div", { style: { fontFamily: F.disp, fontWeight: 600, fontSize: 15, letterSpacing: "0.08em", textTransform: "uppercase", color: C.mut, marginBottom: 8 } }, "Tipas"), /* @__PURE__ */ React.createElement("div", { className: "grid grid-cols-2 gap-2" }, TYPES.map((t) => {
+      const sel = pickedType === t;
+      return /* @__PURE__ */ React.createElement(
+        "button",
+        {
+          key: t,
+          onClick: () => setPickedType(t),
+          style: {
+            fontFamily: F.disp,
+            fontWeight: 600,
+            fontSize: 18,
+            letterSpacing: "0.04em",
+            textTransform: "uppercase",
+            background: sel ? C.hi : C.card,
+            color: C.ink,
+            border: `1px solid ${sel ? C.ink : C.line}`,
+            borderRadius: 8,
+            padding: "14px 0",
+            cursor: "pointer"
+          }
+        },
+        t
+      );
+    }))), /* @__PURE__ */ React.createElement("button", { onClick: startWorkout, style: btnPrimary }, /* @__PURE__ */ React.createElement(Play, { size: 18 }), " Prad\u0117ti treniruot\u0119"), workouts.length === 0 && /* @__PURE__ */ React.createElement("p", { style: { fontFamily: F.body, fontSize: 14, color: C.mut, margin: 0 } }, "Tu\u0161\u010Dias lapas. Pirma treniruot\u0117 taps atskaitos ta\u0161ku \u2014 nuo jos skai\u010Diuosim progres\u0105."));
+    const renderActive = () => /* @__PURE__ */ React.createElement("div", { className: "flex flex-col gap-3 pb-24" }, /* @__PURE__ */ React.createElement("div", { className: "flex items-center justify-between" }, /* @__PURE__ */ React.createElement("div", { className: "flex items-center gap-2" }, /* @__PURE__ */ React.createElement(Tag, null, draft.type), /* @__PURE__ */ React.createElement("span", { style: { fontFamily: F.mono, fontSize: 12, color: C.mut } }, new Date(draft.date).toLocaleTimeString("lt-LT", { hour: "2-digit", minute: "2-digit" }))), /* @__PURE__ */ React.createElement(Confirm2, { label: "At\u0161aukti", confirmLabel: "Tikrai at\u0161aukti?", onConfirm: cancelWorkout })), draft.exercises.map((ex) => /* @__PURE__ */ React.createElement(
+      ExerciseCard,
+      {
+        key: ex.id,
+        ex,
+        prev: prevFor(ex.name),
+        onSet: (setId, f, v) => setField(ex.id, setId, f, v),
+        onAddSet: () => addSet(ex.id),
+        onRemoveSet: (setId) => removeSet(ex.id, setId),
+        onRemove: () => removeExercise(ex.id)
+      }
+    )), /* @__PURE__ */ React.createElement(AddExercise, { library, onPick: addExercise }), finishing ? /* @__PURE__ */ React.createElement("div", { style: { background: C.card, border: `2px solid ${C.ink}`, borderRadius: 10, padding: "14px" }, className: "flex flex-col gap-4" }, /* @__PURE__ */ React.createElement("div", { style: { fontFamily: F.disp, fontWeight: 700, fontSize: 22, textTransform: "uppercase" } }, "Fini\u0161as"), /* @__PURE__ */ React.createElement("div", { className: "flex items-center gap-3" }, /* @__PURE__ */ React.createElement("label", { style: { fontFamily: F.disp, fontWeight: 600, fontSize: 14, letterSpacing: "0.06em", textTransform: "uppercase", color: C.mut } }, "Trukm\u0117, min"), /* @__PURE__ */ React.createElement(
+      "input",
+      {
+        inputMode: "numeric",
+        value: draft.durationMin,
+        onChange: (e) => setDraft((d) => ({ ...d, durationMin: e.target.value })),
+        style: {
+          fontFamily: F.mono,
+          fontSize: 17,
+          width: 80,
+          textAlign: "center",
+          background: C.paper,
+          border: `1px solid ${C.line}`,
+          borderRadius: 6,
+          padding: "8px 6px",
+          color: C.ink
+        }
+      }
+    )), /* @__PURE__ */ React.createElement("div", null, /* @__PURE__ */ React.createElement("div", { style: { fontFamily: F.disp, fontWeight: 600, fontSize: 14, letterSpacing: "0.06em", textTransform: "uppercase", color: C.mut, marginBottom: 8 } }, "Visos treniruot\u0117s RPE"), /* @__PURE__ */ React.createElement(PlatePicker, { value: draft.srpe, onChange: (v) => setDraft((d) => ({ ...d, srpe: v })) })), /* @__PURE__ */ React.createElement(
+      "textarea",
+      {
+        value: draft.notes,
+        onChange: (e) => setDraft((d) => ({ ...d, notes: e.target.value })),
+        placeholder: "Pastabos: savijauta, technika, skausmai\u2026",
+        rows: 3,
+        style: {
+          fontFamily: F.body,
+          fontSize: 15,
+          background: C.paper,
+          border: `1px solid ${C.line}`,
+          borderRadius: 6,
+          padding: "10px 12px",
+          color: C.ink,
+          resize: "vertical"
+        }
+      }
+    ), /* @__PURE__ */ React.createElement("div", { className: "flex gap-2" }, /* @__PURE__ */ React.createElement(
+      "button",
+      {
+        onClick: () => setFinishing(false),
+        style: { ...btnPrimary, background: C.card, color: C.ink, border: `1px solid ${C.line}`, width: "auto", padding: "13px 16px" }
+      },
+      "Gr\u012F\u017Eti"
+    ), /* @__PURE__ */ React.createElement("button", { onClick: saveWorkout, style: { ...btnPrimary, padding: "13px 16px" } }, /* @__PURE__ */ React.createElement(Check, { size: 18 }), " I\u0161saugoti"))) : /* @__PURE__ */ React.createElement(
+      "div",
+      {
+        className: "fixed left-0 right-0",
+        style: { bottom: 64, padding: "0 16px", maxWidth: 448, margin: "0 auto" }
+      },
+      /* @__PURE__ */ React.createElement("button", { onClick: openFinish, style: { ...btnPrimary, boxShadow: "0 4px 14px rgba(23,23,27,0.25)" } }, /* @__PURE__ */ React.createElement(Flag, { size: 18 }), " Baigti treniruot\u0119")
+    ));
+    const renderHistory = () => {
+      const sorted = [...workouts].sort((a, b) => a.date < b.date ? 1 : -1);
+      return /* @__PURE__ */ React.createElement("div", { className: "flex flex-col gap-3" }, /* @__PURE__ */ React.createElement("h1", { style: { fontFamily: F.disp, fontWeight: 700, fontSize: 34, textTransform: "uppercase", margin: 0 } }, "Istorija"), /* @__PURE__ */ React.createElement(
+        "div",
+        {
+          className: "flex items-center justify-between",
+          style: { fontFamily: F.mono, fontSize: 13, borderTop: `2px solid ${C.ink}`, borderBottom: `1px solid ${C.line}`, padding: "8px 2px" }
+        },
+        /* @__PURE__ */ React.createElement("span", null, "\u0160I SAVAIT\u0116"),
+        /* @__PURE__ */ React.createElement("span", null, week.count, " tren. \xB7 ", fmtKg(week.tonnage), " kg")
+      ), sorted.length === 0 && /* @__PURE__ */ React.createElement("p", { style: { fontFamily: F.body, fontSize: 14, color: C.mut } }, "\u012Era\u0161\u0173 dar n\u0117ra. U\u017Ebaigta treniruot\u0117 atsiras \u010Dia."), sorted.map((w) => {
+        const open = expanded === w.id;
+        const t = tonnage(w);
+        return /* @__PURE__ */ React.createElement("div", { key: w.id, style: { background: C.card, border: `1px solid ${C.line}`, borderRadius: 10, overflow: "hidden" } }, /* @__PURE__ */ React.createElement(
+          "button",
+          {
+            onClick: () => setExpanded(open ? null : w.id),
+            className: "w-full flex items-center justify-between gap-2",
+            style: { background: "transparent", border: "none", padding: "12px 14px", cursor: "pointer", textAlign: "left" }
+          },
+          /* @__PURE__ */ React.createElement("div", { className: "flex items-center gap-2", style: { minWidth: 0 } }, /* @__PURE__ */ React.createElement("span", { style: { fontFamily: F.mono, fontSize: 13, color: C.ink, whiteSpace: "nowrap" } }, fmtDate(w.date)), /* @__PURE__ */ React.createElement(Tag, null, w.type)),
+          /* @__PURE__ */ React.createElement("div", { className: "flex items-center gap-2" }, /* @__PURE__ */ React.createElement("span", { style: { fontFamily: F.mono, fontSize: 12, color: C.mut, whiteSpace: "nowrap" } }, w.exercises.length, " pr.", t > 0 ? ` \xB7 ${fmtKg(t)} kg` : ""), w.srpe ? /* @__PURE__ */ React.createElement(PlateDot, { v: w.srpe }) : null, open ? /* @__PURE__ */ React.createElement(ChevronUp, { size: 16, color: C.mut }) : /* @__PURE__ */ React.createElement(ChevronDown, { size: 16, color: C.mut }))
+        ), open && /* @__PURE__ */ React.createElement("div", { style: { borderTop: `1px solid ${C.line}`, padding: "12px 14px" }, className: "flex flex-col gap-3" }, w.exercises.map((ex) => /* @__PURE__ */ React.createElement("div", { key: ex.id }, /* @__PURE__ */ React.createElement("div", { style: { fontFamily: F.disp, fontWeight: 600, fontSize: 16, textTransform: "uppercase" } }, ex.name), /* @__PURE__ */ React.createElement("div", { style: { fontFamily: F.mono, fontSize: 13, color: C.ink, marginTop: 2 } }, ex.sets.map((s, i) => /* @__PURE__ */ React.createElement("span", { key: s.id }, i > 0 && /* @__PURE__ */ React.createElement("span", { style: { color: C.mut } }, " \xB7 "), s.kg || "\u2013", "\xD7", s.reps || "\u2013", s.rpe ? /* @__PURE__ */ React.createElement("span", { style: { color: rpeColor(s.rpe) } }, " @", s.rpe) : null))))), (w.durationMin || w.srpe) && /* @__PURE__ */ React.createElement("div", { style: { fontFamily: F.mono, fontSize: 12, color: C.mut } }, w.durationMin ? `${w.durationMin} min` : "", w.durationMin && w.srpe ? " \xB7 " : "", w.srpe ? `sRPE ${w.srpe}` : ""), w.notes && /* @__PURE__ */ React.createElement("p", { style: { fontFamily: F.body, fontSize: 14, color: C.ink, margin: 0, whiteSpace: "pre-wrap" } }, w.notes), /* @__PURE__ */ React.createElement("div", { className: "flex justify-end" }, /* @__PURE__ */ React.createElement(
+          Confirm2,
+          {
+            label: "Trinti",
+            confirmLabel: "Tikrai trinti?",
+            onConfirm: () => deleteWorkout(w.id),
+            icon: /* @__PURE__ */ React.createElement(Trash2, { size: 13, style: { marginRight: 4 } })
+          }
+        ))));
+      }));
+    };
+    const renderData = () => /* @__PURE__ */ React.createElement("div", { className: "flex flex-col gap-4" }, /* @__PURE__ */ React.createElement("h1", { style: { fontFamily: F.disp, fontWeight: 700, fontSize: 34, textTransform: "uppercase", margin: 0 } }, "Duomenys"), /* @__PURE__ */ React.createElement("div", { style: { fontFamily: F.mono, fontSize: 13, borderTop: `2px solid ${C.ink}`, borderBottom: `1px solid ${C.line}`, padding: "8px 2px" } }, workouts.length, " treniruo\u010Di\u0173", workouts.length > 0 ? ` \xB7 nuo ${fmtDate(workouts[workouts.length - 1].date)}` : "", !storageOk && /* @__PURE__ */ React.createElement("span", { style: { color: C.red } }, " \xB7 ATMINTIS NEPASIEKIAMA \u2014 duomenys nei\u0161saugomi")), /* @__PURE__ */ React.createElement("div", null, /* @__PURE__ */ React.createElement("div", { style: { fontFamily: F.disp, fontWeight: 600, fontSize: 15, letterSpacing: "0.06em", textTransform: "uppercase", color: C.mut, marginBottom: 6 } }, "Eksportas \u2014 savait\u0117s per\u017Ei\u016Brai"), /* @__PURE__ */ React.createElement("p", { style: { fontFamily: F.body, fontSize: 14, color: C.ink, margin: "0 0 8px" } }, "Nukopijuok ir \u012Fklijuok pokalbyje su Claude. Tas pats failas \u2014 ir tavo atsargin\u0117 kopija."), /* @__PURE__ */ React.createElement("button", { onClick: copyExport, style: { ...btnPrimary, fontSize: 16, padding: "12px 16px" } }, /* @__PURE__ */ React.createElement(Copy, { size: 16 }), " ", copied ? "Nukopijuota" : "Kopijuoti JSON"), /* @__PURE__ */ React.createElement(
+      "textarea",
+      {
+        ref: exportRef,
+        readOnly: true,
+        value: exportJson,
+        rows: 6,
+        style: {
+          width: "100%",
+          marginTop: 8,
+          fontFamily: F.mono,
+          fontSize: 11,
+          background: C.card,
+          border: `1px solid ${C.line}`,
+          borderRadius: 8,
+          padding: 10,
+          color: C.mut,
+          resize: "vertical"
+        }
+      }
+    )), /* @__PURE__ */ React.createElement(Rule, null), /* @__PURE__ */ React.createElement("div", null, /* @__PURE__ */ React.createElement("div", { style: { fontFamily: F.disp, fontWeight: 600, fontSize: 15, letterSpacing: "0.06em", textTransform: "uppercase", color: C.mut, marginBottom: 6 } }, "Importas \u2014 atk\u016Brimas i\u0161 kopijos"), /* @__PURE__ */ React.createElement(
+      "textarea",
+      {
+        value: importText,
+        onChange: (e) => setImportText(e.target.value),
+        placeholder: "\u012Eklijuok anks\u010Diau eksportuot\u0105 JSON\u2026",
+        rows: 4,
+        style: {
+          width: "100%",
+          fontFamily: F.mono,
+          fontSize: 12,
+          background: C.card,
+          border: `1px solid ${C.line}`,
+          borderRadius: 8,
+          padding: 10,
+          color: C.ink,
+          resize: "vertical"
+        }
+      }
+    ), /* @__PURE__ */ React.createElement("div", { className: "flex items-center gap-3 mt-2" }, /* @__PURE__ */ React.createElement(
+      "button",
+      {
+        onClick: doImport,
+        disabled: !importText.trim(),
+        style: {
+          ...btnPrimary,
+          fontSize: 16,
+          padding: "12px 16px",
+          width: "auto",
+          opacity: importText.trim() ? 1 : 0.4
+        }
+      },
+      /* @__PURE__ */ React.createElement(Upload, { size: 16 }),
+      " Importuoti"
+    ), importMsg && /* @__PURE__ */ React.createElement("span", { style: { fontFamily: F.body, fontSize: 13, color: C.mut } }, importMsg))));
+    const renderProgress = () => {
+      const axis = { fontFamily: F.mono, fontSize: 10, fill: C.mut };
+      const tip = { contentStyle: { fontFamily: F.mono, fontSize: 12, border: `1px solid ${C.line}`, borderRadius: 6, background: C.card } };
+      const secLabel = { fontFamily: F.disp, fontWeight: 600, fontSize: 15, letterSpacing: "0.06em", textTransform: "uppercase", color: C.mut, marginBottom: 6 };
+      const chartBox = { background: C.card, border: `1px solid ${C.line}`, borderRadius: 10, padding: "12px 8px 4px 0" };
+      const enough = workouts.length >= 2;
+      return /* @__PURE__ */ React.createElement("div", { className: "flex flex-col gap-4" }, /* @__PURE__ */ React.createElement("h1", { style: { fontFamily: F.disp, fontWeight: 700, fontSize: 34, textTransform: "uppercase", margin: 0 } }, "Progresas"), /* @__PURE__ */ React.createElement(
+        "div",
+        {
+          className: "flex items-center justify-between",
+          style: { fontFamily: F.mono, fontSize: 13, borderTop: `2px solid ${C.ink}`, borderBottom: `1px solid ${C.line}`, padding: "8px 2px" }
+        },
+        /* @__PURE__ */ React.createElement("span", null, "VISO"),
+        /* @__PURE__ */ React.createElement("span", null, workouts.length, " tren. \xB7 \u0161i sav. ", fmtKg(week.tonnage), " kg")
+      ), !enough ? /* @__PURE__ */ React.createElement("p", { style: { fontFamily: F.body, fontSize: 14, color: C.mut } }, "Grafikai atsiras po 2\u20133 u\u017Efiksuot\u0173 treniruo\u010Di\u0173 su svoriais.") : /* @__PURE__ */ React.createElement(React.Fragment, null, /* @__PURE__ */ React.createElement("div", null, /* @__PURE__ */ React.createElement("div", { style: secLabel }, "Savaitinis tona\u017Eas, kg"), /* @__PURE__ */ React.createElement("div", { style: chartBox }, /* @__PURE__ */ React.createElement(ResponsiveContainer, { width: "100%", height: 170 }, /* @__PURE__ */ React.createElement(BarChart, { data: weeklyData, margin: { top: 4, right: 8, left: -10, bottom: 0 } }, /* @__PURE__ */ React.createElement(CartesianGrid, { stroke: C.line, vertical: false }), /* @__PURE__ */ React.createElement(XAxis, { dataKey: "label", tick: axis, axisLine: { stroke: C.line }, tickLine: false }), /* @__PURE__ */ React.createElement(YAxis, { tick: axis, axisLine: false, tickLine: false, width: 46 }), /* @__PURE__ */ React.createElement(Tooltip, { ...tip }), /* @__PURE__ */ React.createElement(Bar, { dataKey: "tonnage", name: "kg", fill: C.ink, radius: [3, 3, 0, 0] }))))), /* @__PURE__ */ React.createElement("div", null, /* @__PURE__ */ React.createElement("div", { style: secLabel }, "Savaitin\u0117 apkrova (sRPE \xD7 min)"), /* @__PURE__ */ React.createElement("div", { style: chartBox }, /* @__PURE__ */ React.createElement(ResponsiveContainer, { width: "100%", height: 150 }, /* @__PURE__ */ React.createElement(LineChart, { data: weeklyData, margin: { top: 6, right: 8, left: -10, bottom: 0 } }, /* @__PURE__ */ React.createElement(CartesianGrid, { stroke: C.line, vertical: false }), /* @__PURE__ */ React.createElement(XAxis, { dataKey: "label", tick: axis, axisLine: { stroke: C.line }, tickLine: false }), /* @__PURE__ */ React.createElement(YAxis, { tick: axis, axisLine: false, tickLine: false, width: 46 }), /* @__PURE__ */ React.createElement(Tooltip, { ...tip }), /* @__PURE__ */ React.createElement(Line, { type: "monotone", dataKey: "load", name: "apkrova", stroke: C.red, strokeWidth: 2, dot: { r: 3, fill: C.red } })))), /* @__PURE__ */ React.createElement("p", { style: { fontFamily: F.mono, fontSize: 11, color: C.mut, margin: "4px 2px 0" } }, "Skai\u010Diuojama i\u0161 sesijos RPE ir trukm\u0117s \u2014 pildyk fini\u0161e.")), exActive && /* @__PURE__ */ React.createElement("div", null, /* @__PURE__ */ React.createElement("div", { style: secLabel }, "Pratimo progresas"), /* @__PURE__ */ React.createElement(
+        "select",
+        {
+          value: exActive,
+          onChange: (e) => setExSel(e.target.value),
+          style: { width: "100%", fontFamily: F.body, fontSize: 15, background: C.card, border: `1px solid ${C.line}`, borderRadius: 6, padding: "10px 12px", color: C.ink, marginBottom: 8 }
+        },
+        exNames.map((n) => /* @__PURE__ */ React.createElement("option", { key: n, value: n }, n))
+      ), /* @__PURE__ */ React.createElement("div", { style: chartBox }, /* @__PURE__ */ React.createElement(ResponsiveContainer, { width: "100%", height: 170 }, /* @__PURE__ */ React.createElement(LineChart, { data: exSeries, margin: { top: 6, right: 8, left: -10, bottom: 0 } }, /* @__PURE__ */ React.createElement(CartesianGrid, { stroke: C.line, vertical: false }), /* @__PURE__ */ React.createElement(XAxis, { dataKey: "label", tick: axis, axisLine: { stroke: C.line }, tickLine: false }), /* @__PURE__ */ React.createElement(YAxis, { tick: axis, axisLine: false, tickLine: false, width: 46, domain: ["auto", "auto"] }), /* @__PURE__ */ React.createElement(Tooltip, { ...tip }), /* @__PURE__ */ React.createElement(Line, { type: "monotone", dataKey: "e1RM", name: "e1RM", stroke: C.blue, strokeWidth: 2, dot: { r: 3, fill: C.blue } }), /* @__PURE__ */ React.createElement(Line, { type: "monotone", dataKey: "kg", name: "maks. kg", stroke: C.green, strokeWidth: 2, dot: { r: 3, fill: C.green } })))), /* @__PURE__ */ React.createElement("p", { style: { fontFamily: F.mono, fontSize: 11, color: C.mut, margin: "4px 2px 0" } }, "M\u0117lyna \u2014 e1RM (Epley) \xB7 \u017Ealia \u2014 sunkiausia serija, kg"))));
+    };
+    const navItems = [
+      { id: "log", label: "Treniruot\u0117", Icon: Dumbbell },
+      { id: "history", label: "Istorija", Icon: History },
+      { id: "progress", label: "Progresas", Icon: TrendingUp },
+      { id: "data", label: "Duomenys", Icon: Database }
+    ];
+    return /* @__PURE__ */ React.createElement("div", { style: { minHeight: "100vh", background: C.paper, color: C.ink, fontFamily: F.body } }, /* @__PURE__ */ React.createElement("style", null, `
+        @import url('https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;600;700&family=Barlow:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap');
+        * { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+        input:focus, textarea:focus, button:focus-visible { outline: 2px solid ${C.hi}; outline-offset: 2px; }
+        input::placeholder, textarea::placeholder { color: #A8A69E; }
+        @media (prefers-reduced-motion: reduce) { * { transition: none !important; animation: none !important; } }
+      `), toast && /* @__PURE__ */ React.createElement(
+      "div",
+      {
+        className: "fixed left-1/2",
+        style: {
+          top: 14,
+          transform: "translateX(-50%)",
+          zIndex: 50,
+          fontFamily: F.disp,
+          fontWeight: 600,
+          fontSize: 15,
+          letterSpacing: "0.06em",
+          textTransform: "uppercase",
+          background: C.ink,
+          color: C.hi,
+          padding: "8px 16px",
+          borderRadius: 6
+        }
+      },
+      toast
+    ), /* @__PURE__ */ React.createElement("div", { style: { maxWidth: 448, margin: "0 auto", padding: "20px 16px 96px" } }, !loaded ? /* @__PURE__ */ React.createElement("div", { style: { fontFamily: F.mono, fontSize: 13, color: C.mut, padding: "40px 0", textAlign: "center" } }, "Kraunama\u2026") : view === "log" ? draft ? renderActive() : renderStart() : view === "history" ? renderHistory() : view === "progress" ? renderProgress() : renderData()), /* @__PURE__ */ React.createElement(
+      "nav",
+      {
+        className: "fixed bottom-0 left-0 right-0",
+        style: { background: C.paper, borderTop: `1px solid ${C.line}`, zIndex: 40 }
+      },
+      /* @__PURE__ */ React.createElement("div", { className: "grid grid-cols-4", style: { maxWidth: 448, margin: "0 auto" } }, navItems.map(({ id, label, Icon }) => {
+        const sel = view === id;
+        return /* @__PURE__ */ React.createElement(
+          "button",
+          {
+            key: id,
+            onClick: () => setView(id),
+            className: "flex flex-col items-center gap-1",
+            style: { background: "transparent", border: "none", padding: "10px 0 12px", cursor: "pointer" }
+          },
+          /* @__PURE__ */ React.createElement(Icon, { size: 20, color: sel ? C.ink : C.mut }),
+          /* @__PURE__ */ React.createElement(
+            "span",
+            {
+              style: {
+                fontFamily: F.disp,
+                fontWeight: 600,
+                fontSize: 12,
+                letterSpacing: "0.08em",
+                textTransform: "uppercase",
+                color: sel ? C.ink : C.mut,
+                background: sel ? C.hi : "transparent",
+                padding: "1px 6px",
+                borderRadius: 3
+              }
+            },
+            label
+          ),
+          id === "log" && draft && !sel && /* @__PURE__ */ React.createElement("span", { style: { width: 5, height: 5, borderRadius: "50%", background: C.red, position: "absolute", marginTop: -2 } })
+        );
+      }))
+    ));
+  }
+  ReactDOM.createRoot(document.getElementById("root")).render(React.createElement(TreniruociuZurnalas));
+})();
+ }
+    catch(e){
+      document.getElementById('boot').textContent = 'Klaida: ' + e.message;
+      console.error(e);
+    }
+  }
+  var tries = 0;
+  var t = setInterval(function(){
+    tries++;
+    if(ready()){ clearInterval(t); boot(); }
+    else if(tries > 100){ clearInterval(t); boot(); }
+  }, 100);
+})();
+</script>
+</body>
+</html>
