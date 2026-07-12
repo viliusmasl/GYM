@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="lt"><head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"/>
+<title>Progresas</title>
+<meta name="theme-color" content="#17171B"/>
+<meta name="apple-mobile-web-app-capable" content="yes"/>
+<meta name="apple-mobile-web-app-title" content="Progresas"/>
+<link rel="icon" href="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAxODAgMTgwIj48cmVjdCB3aWR0aD0iMTgwIiBoZWlnaHQ9IjE4MCIgcng9IjQwIiBmaWxsPSIjMTcxNzFCIi8+PHBvbHlsaW5lIHBvaW50cz0iMzUsMTIwIDcwLDkwIDEwMCwxMDUgMTQ1LDU1IiBmaWxsPSJub25lIiBzdHJva2U9IiNGRkQxMDAiIHN0cm9rZS13aWR0aD0iMTQiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCIvPjwvc3ZnPg=="/><link rel="apple-touch-icon" href="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAxODAgMTgwIj48cmVjdCB3aWR0aD0iMTgwIiBoZWlnaHQ9IjE4MCIgcng9IjQwIiBmaWxsPSIjMTcxNzFCIi8+PHBvbHlsaW5lIHBvaW50cz0iMzUsMTIwIDcwLDkwIDEwMCwxMDUgMTQ1LDU1IiBmaWxsPSJub25lIiBzdHJva2U9IiNGRkQxMDAiIHN0cm9rZS13aWR0aD0iMTQiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCIvPjwvc3ZnPg=="/>
+<style>html,body{margin:0;padding:0;background:#F6F5F0}#root{min-height:100vh}#boot{font-family:monospace;color:#71706A;text-align:center;padding:48px 16px}</style>
+</head><body>
+<div id="root"><div id="boot">Kraunama...</div></div>
+<script>
+
+var R=["https://cdnjs.cloudflare.com/ajax/libs/react/18.3.1/umd/react.production.min.js","https://unpkg.com/react@18.3.1/umd/react.production.min.js","https://cdn.jsdelivr.net/npm/react@18.3.1/umd/react.production.min.js"];
+var D=["https://cdnjs.cloudflare.com/ajax/libs/react-dom/18.3.1/umd/react-dom.production.min.js","https://unpkg.com/react-dom@18.3.1/umd/react-dom.production.min.js","https://cdn.jsdelivr.net/npm/react-dom@18.3.1/umd/react-dom.production.min.js"];
+function m(t){var b=document.getElementById('boot'); if(b)b.textContent=t;}
+function L(u,i){return new Promise(function(ok,no){i=i||0;if(i>=u.length){no(new Error('CDN'));return;}
+var s=document.createElement('script');s.src=u[i];s.crossOrigin="anonymous";
+s.onload=function(){ok();};s.onerror=function(){s.remove();L(u,i+1).then(ok,no);};document.head.appendChild(s);});}
+m('Kraunama...');
+L(R).then(function(){return L(D);}).then(function(){
+  if(!(window.React&&window.ReactDOM))throw new Error('React');
+  try{ (() => {
+  const C = {
+    paper: "#F6F5F0",
+    card: "#FFFFFF",
+    ink: "#17171B",
+    mut: "#71706A",
+    line: "#DCDAD1",
+    hi: "#FFD100",
+    green: "#2E9E44",
+    red: "#D6382C",
+    blue: "#2456C4",
+    ghost: "#B9B7AE"
+  };
+  const F = {
+    disp: "'Barlow Condensed','Arial Narrow',sans-serif",
+    body: "'Barlow',system-ui,sans-serif",
+    mono: "'IBM Plex Mono','Courier New',monospace"
+  };
+  const STORE_KEY = "gymlog_v2";
+  const num = (s) => {
+    if (s == null || s === "") return null;
+    const v = parseFloat(String(s).replace(",", ".").replace("+", ""));
+    return Number.isNaN(v) ? null : v;
+  };
+  const e1rm = (w, r) => r > 0 ? w * (1 + r / 30) : w;
+  const fmtD = (iso) => iso ? iso.slice(5).replace("-", ".") : "";
+  const mondayOf = (iso) => {
+    const x = /* @__PURE__ */ new Date(iso + "T12:00:00");
+    const day = (x.getDay() + 6) % 7;
+    x.setDate(x.getDate() - day);
+    return x.toISOString().slice(0, 10);
+  };
+  const setsOf = (e) => {
+    const out = [];
+    if (e.pyramid) {
+      for (let i = 0; i < 4; i++) {
+        const w = num(e.w && e.w[i]), r = num(e.r && e.r[i]);
+        if (w != null || r != null) out.push({ w, r });
+      }
+    } else {
+      const w = num(e.weight);
+      (e.r || []).forEach((rr) => {
+        const r = num(rr);
+        if (r != null) out.push({ w, r });
+      });
+    }
+    return out;
+  };
+  function niceMax(v) {
+    if (v <= 0) return 10;
+    const p = Math.pow(10, Math.floor(Math.log10(v)));
+    const n = v / p;
+    return (n <= 1 ? 1 : n <= 2 ? 2 : n <= 5 ? 5 : 10) * p;
+  }
+  function LineSVG({ data, series, ymin, height = 190 }) {
+    const W = 360, H = height, padL = 42, padR = 10, padT = 12, padB = 24;
+    const iw = W - padL - padR, ih = H - padT - padB;
+    const all = [];
+    data.forEach((d) => series.forEach((s) => {
+      if (d[s.key] != null) all.push(d[s.key]);
+    }));
+    if (!all.length) return null;
+    let max = Math.max(...all), min = ymin != null ? ymin : Math.min(...all);
+    const span = Math.max(1, max - min);
+    max += span * 0.08;
+    min -= span * 0.08;
+    const n = data.length;
+    const x = (i) => padL + (n === 1 ? iw / 2 : i / (n - 1) * iw);
+    const y = (v) => padT + ih - (v - min) / (max - min) * ih;
+    const ticks = [min, (min + max) / 2, max];
+    const lbl = (i) => i === 0 || i === n - 1 || i === Math.floor((n - 1) / 2);
+    return /* @__PURE__ */ React.createElement("svg", { viewBox: `0 0 ${W} ${H}`, width: "100%", style: { display: "block" } }, ticks.map((t, i) => /* @__PURE__ */ React.createElement("g", { key: i }, /* @__PURE__ */ React.createElement("line", { x1: padL, y1: y(t), x2: W - padR, y2: y(t), stroke: C.line, strokeWidth: "1" }), /* @__PURE__ */ React.createElement("text", { x: padL - 5, y: y(t) + 3, textAnchor: "end", fontFamily: F.mono, fontSize: "10", fill: C.mut }, Math.round(t * 10) / 10))), series.map((s) => {
+      const pts = data.map((d, i) => d[s.key] == null ? null : `${x(i)},${y(d[s.key])}`).filter(Boolean);
+      return /* @__PURE__ */ React.createElement("g", { key: s.key }, /* @__PURE__ */ React.createElement("polyline", { points: pts.join(" "), fill: "none", stroke: s.color, strokeWidth: "2" }), n <= 40 && data.map((d, i) => d[s.key] == null ? null : /* @__PURE__ */ React.createElement("circle", { key: i, cx: x(i), cy: y(d[s.key]), r: "2.5", fill: s.color })));
+    }), data.map((d, i) => lbl(i) ? /* @__PURE__ */ React.createElement("text", { key: i, x: x(i), y: H - 8, textAnchor: i === 0 ? "start" : i === n - 1 ? "end" : "middle", fontFamily: F.mono, fontSize: "9", fill: C.mut }, d.label) : null));
+  }
+  function BarSVG({ data, valueKey, countKey, color, height = 170 }) {
+    const W = 360, H = height, padL = 46, padR = 8, padT = 16, padB = 24;
+    const iw = W - padL - padR, ih = H - padT - padB;
+    const vals = data.map((d) => d[valueKey] || 0);
+    const max = niceMax(Math.max(1, ...vals));
+    const n = data.length || 1;
+    const bw = iw / n * 0.62, gap = iw / n * 0.38;
+    const y = (v) => padT + ih - v / max * ih;
+    return /* @__PURE__ */ React.createElement("svg", { viewBox: `0 0 ${W} ${H}`, width: "100%", style: { display: "block" } }, [0, max / 2, max].map((t, i) => /* @__PURE__ */ React.createElement("g", { key: i }, /* @__PURE__ */ React.createElement("line", { x1: padL, y1: y(t), x2: W - padR, y2: y(t), stroke: C.line, strokeWidth: "1" }), /* @__PURE__ */ React.createElement("text", { x: padL - 5, y: y(t) + 3, textAnchor: "end", fontFamily: F.mono, fontSize: "10", fill: C.mut }, Math.round(t / 1e3) >= 1 ? `${Math.round(t / 100) / 10}k` : Math.round(t)))), data.map((d, i) => {
+      const v = d[valueKey] || 0;
+      const xx = padL + i * (bw + gap) + gap / 2;
+      return /* @__PURE__ */ React.createElement("g", { key: i }, /* @__PURE__ */ React.createElement("rect", { x: xx, y: y(v), width: bw, height: Math.max(0, ih - (y(v) - padT)), rx: "2.5", fill: color }), countKey && d[countKey] ? /* @__PURE__ */ React.createElement("text", { x: xx + bw / 2, y: y(v) - 4, textAnchor: "middle", fontFamily: F.mono, fontSize: "9", fill: C.mut }, d[countKey]) : null, (i === 0 || i === n - 1 || n <= 8) && /* @__PURE__ */ React.createElement("text", { x: xx + bw / 2, y: H - 8, textAnchor: "middle", fontFamily: F.mono, fontSize: "9", fill: C.mut }, d.label));
+    }));
+  }
+  function Section({ title, children, right }) {
+    return /* @__PURE__ */ React.createElement("div", { style: { marginBottom: 22 } }, /* @__PURE__ */ React.createElement("div", { style: { display: "flex", justifyContent: "space-between", alignItems: "baseline", borderBottom: `2px solid ${C.ink}`, paddingBottom: 4, marginBottom: 8 } }, /* @__PURE__ */ React.createElement("span", { style: { fontFamily: F.disp, fontWeight: 700, fontSize: 18, letterSpacing: ".05em", textTransform: "uppercase" } }, title), right), children);
+  }
+  const cardS = { background: C.card, border: `1px solid ${C.line}`, borderRadius: 10, padding: "10px 6px 4px" };
+  function Dash() {
+    const [hist, setHist] = React.useState([]);
+    const [local, setLocal] = React.useState([]);
+    const [pasted, setPasted] = React.useState([]);
+    const [pasteTxt, setPasteTxt] = React.useState("");
+    const [status, setStatus] = React.useState("Kraunama\u2026");
+    const [exSel, setExSel] = React.useState("");
+    React.useEffect(() => {
+      try {
+        const raw = localStorage.getItem(STORE_KEY);
+        if (raw) setLocal(JSON.parse(raw).workouts || []);
+      } catch (e) {
+      }
+      fetch("istorija.json").then((r) => r.ok ? r.json() : Promise.reject()).then((j) => {
+        setHist(j.workouts || []);
+        setStatus("");
+      }).catch(() => setStatus("istorija.json nerasta \u2014 rodomi tik appso/\u012Fklijuoti duomenys"));
+    }, []);
+    const all = React.useMemo(() => {
+      const seen = /* @__PURE__ */ new Set();
+      const out = [];
+      [...hist, ...local, ...pasted].forEach((w) => {
+        if (w && w.id && !seen.has(w.id)) {
+          seen.add(w.id);
+          out.push(w);
+        }
+      });
+      return out.sort((a, b) => a.date > b.date ? 1 : -1);
+    }, [hist, local, pasted]);
+    const bw = React.useMemo(() => {
+      const m = /* @__PURE__ */ new Map();
+      all.forEach((w) => {
+        const v = num(w.bodyweight);
+        if (v != null) m.set(w.date, v);
+      });
+      return [...m.entries()].sort().map(([d, v]) => ({ label: fmtD(d), v }));
+    }, [all]);
+    const exNames = React.useMemo(() => {
+      const f = /* @__PURE__ */ new Map();
+      all.forEach((w) => (w.exercises || []).forEach((e) => {
+        if (setsOf(e).some((s) => s.w != null && s.r != null)) f.set(e.name, (f.get(e.name) || 0) + 1);
+      }));
+      return [...f.entries()].filter(([, c]) => c >= 2).sort((a, b) => b[1] - a[1]).map(([n]) => n);
+    }, [all]);
+    const exActive = exSel || exNames[0] || "";
+    const exSeries = React.useMemo(() => {
+      if (!exActive) return [];
+      const out = [];
+      all.forEach((w) => {
+        const e = (w.exercises || []).find((x) => x.name === exActive);
+        if (!e) return;
+        let top = null, best = null;
+        setsOf(e).forEach((s) => {
+          if (s.w != null) top = Math.max(top == null ? -1 : top, s.w);
+          if (s.w != null && s.r != null) best = Math.max(best == null ? -1 : best, e1rm(s.w, s.r));
+        });
+        if (top != null || best != null)
+          out.push({ label: fmtD(w.date), top, e1: best != null ? Math.round(best * 10) / 10 : null });
+      });
+      return out;
+    }, [all, exActive]);
+    const weekly = React.useMemo(() => {
+      const m = /* @__PURE__ */ new Map();
+      all.forEach((w) => {
+        const k = mondayOf(w.date);
+        if (!m.has(k)) m.set(k, { label: fmtD(k), t: 0, n: 0 });
+        const row = m.get(k);
+        row.n += 1;
+        (w.exercises || []).forEach((e) => setsOf(e).forEach((s) => {
+          if (s.w != null && s.r != null) row.t += s.w * s.r;
+        }));
+      });
+      return [...m.entries()].sort().map(([, v]) => ({ ...v, t: Math.round(v.t) })).slice(-12);
+    }, [all]);
+    const prs = React.useMemo(() => {
+      const m = /* @__PURE__ */ new Map();
+      all.forEach((w) => (w.exercises || []).forEach((e) => {
+        if (!m.has(e.name)) m.set(e.name, { n: 0, maxW: null, maxWr: null, e1: null, e1d: "", maxR: null });
+        const p = m.get(e.name);
+        p.n += 1;
+        setsOf(e).forEach((s) => {
+          if (s.w != null && (p.maxW == null || s.w > p.maxW || s.w === p.maxW && s.r > (p.maxWr || 0))) {
+            p.maxW = s.w;
+            p.maxWr = s.r;
+          }
+          if (s.w != null && s.r != null) {
+            const v = e1rm(s.w, s.r);
+            if (p.e1 == null || v > p.e1) {
+              p.e1 = Math.round(v * 10) / 10;
+              p.e1d = w.date;
+            }
+          }
+          if (s.w == null && s.r != null && (p.maxR == null || s.r > p.maxR)) p.maxR = s.r;
+        });
+      }));
+      return [...m.entries()].sort((a, b) => b[1].n - a[1].n).slice(0, 12);
+    }, [all]);
+    const doPaste = () => {
+      try {
+        const j = JSON.parse(pasteTxt);
+        setPasted(j.workouts || []);
+        setPasteTxt("");
+      } catch (e) {
+        alert("Blogas JSON");
+      }
+    };
+    const last = all[all.length - 1];
+    const bwFirst = bw[0], bwLast = bw[bw.length - 1];
+    const week7 = all.filter((w) => (Date.now() - new Date(w.date)) / 864e5 <= 7).length;
+    const stat = (label, val) => /* @__PURE__ */ React.createElement("div", { style: { flex: 1, minWidth: 110 } }, /* @__PURE__ */ React.createElement("div", { style: { fontFamily: F.mono, fontSize: 10, color: C.mut, letterSpacing: ".05em" } }, label), /* @__PURE__ */ React.createElement("div", { style: { fontFamily: F.disp, fontWeight: 700, fontSize: 26, lineHeight: 1 } }, val));
+    return /* @__PURE__ */ React.createElement("div", { style: { minHeight: "100vh", background: C.paper, color: C.ink, fontFamily: F.body } }, /* @__PURE__ */ React.createElement("style", null, `
+        @import url('https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700&family=Barlow:wght@400;600&family=IBM+Plex+Mono:wght@400;500&display=swap');
+        *{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+      `), /* @__PURE__ */ React.createElement("div", { style: { maxWidth: 560, margin: "0 auto", padding: "20px 14px 60px" } }, /* @__PURE__ */ React.createElement("div", { style: { fontFamily: F.mono, fontSize: 11, color: C.mut } }, last ? `${all[0].date.slice(0, 10)} \u2014 ${last.date.slice(0, 10)}` : ""), /* @__PURE__ */ React.createElement("h1", { style: { fontFamily: F.disp, fontWeight: 700, fontSize: 42, textTransform: "uppercase", lineHeight: 0.95, margin: "4px 0 14px" } }, "Progresas"), status && /* @__PURE__ */ React.createElement("div", { style: { fontFamily: F.mono, fontSize: 11, color: C.red, marginBottom: 10 } }, status), all.length === 0 ? /* @__PURE__ */ React.createElement("p", { style: { fontFamily: F.body, fontSize: 14, color: C.mut } }, "Duomen\u0173 n\u0117ra. Telefone atsidaryk per t\u0105 pa\u010Di\u0105 nar\u0161ykl\u0119 kaip appsas, arba \u012Fklijuok JSON \u017Eemiau.") : /* @__PURE__ */ React.createElement(React.Fragment, null, /* @__PURE__ */ React.createElement("div", { style: { display: "flex", gap: 10, flexWrap: "wrap", borderTop: `2px solid ${C.ink}`, borderBottom: `1px solid ${C.line}`, padding: "10px 0", marginBottom: 20 } }, stat("TRENIRUO\u010CI\u0172", all.length), stat("SVORIS DABAR", bwLast ? `${bwLast.v} kg` : "\u2014"), stat("POKYTIS", bwFirst && bwLast ? `${bwLast.v - bwFirst.v > 0 ? "+" : ""}${Math.round((bwLast.v - bwFirst.v) * 10) / 10} kg` : "\u2014"), stat("PER 7 D.", week7)), bw.length >= 2 && /* @__PURE__ */ React.createElement(Section, { title: "K\u016Bno svoris, kg" }, /* @__PURE__ */ React.createElement("div", { style: cardS }, /* @__PURE__ */ React.createElement(LineSVG, { data: bw, series: [{ key: "v", color: C.ink }] }))), exActive && /* @__PURE__ */ React.createElement(Section, { title: "Pratimo progresas" }, /* @__PURE__ */ React.createElement(
+      "select",
+      {
+        value: exActive,
+        onChange: (e) => setExSel(e.target.value),
+        style: { width: "100%", fontFamily: F.body, fontSize: 15, background: C.card, border: `1px solid ${C.line}`, borderRadius: 6, padding: "10px 12px", color: C.ink, marginBottom: 8 }
+      },
+      exNames.map((n) => /* @__PURE__ */ React.createElement("option", { key: n, value: n }, n))
+    ), /* @__PURE__ */ React.createElement("div", { style: cardS }, /* @__PURE__ */ React.createElement(LineSVG, { data: exSeries, series: [{ key: "e1", color: C.blue }, { key: "top", color: C.ink }] })), /* @__PURE__ */ React.createElement("div", { style: { fontFamily: F.mono, fontSize: 11, color: C.mut, marginTop: 4 } }, /* @__PURE__ */ React.createElement("span", { style: { color: C.blue } }, "\u2014"), " e1RM (Epley) \xB7 ", /* @__PURE__ */ React.createElement("span", { style: { color: C.ink } }, "\u2014"), " sunkiausia serija, kg")), weekly.length >= 2 && /* @__PURE__ */ React.createElement(Section, { title: "Savaitinis tona\u017Eas", right: /* @__PURE__ */ React.createElement("span", { style: { fontFamily: F.mono, fontSize: 10, color: C.mut } }, "skai\u010Dius = treniruot\u0117s") }, /* @__PURE__ */ React.createElement("div", { style: cardS }, /* @__PURE__ */ React.createElement(BarSVG, { data: weekly, valueKey: "t", countKey: "n", color: C.ink }))), /* @__PURE__ */ React.createElement(Section, { title: "Rekordai" }, /* @__PURE__ */ React.createElement("div", { style: { background: C.card, border: `1px solid ${C.line}`, borderRadius: 10, overflow: "hidden" } }, /* @__PURE__ */ React.createElement("div", { style: { display: "grid", gridTemplateColumns: "1fr 84px 64px 52px", gap: 4, padding: "8px 10px", borderBottom: `2px solid ${C.ink}`, fontFamily: F.disp, fontSize: 12, fontWeight: 700, letterSpacing: ".05em", textTransform: "uppercase" } }, /* @__PURE__ */ React.createElement("span", null, "Pratimas"), /* @__PURE__ */ React.createElement("span", { style: { textAlign: "right" } }, "Max"), /* @__PURE__ */ React.createElement("span", { style: { textAlign: "right" } }, "e1RM"), /* @__PURE__ */ React.createElement("span", { style: { textAlign: "right" } }, "Data")), prs.map(([name, p], i) => /* @__PURE__ */ React.createElement("div", { key: name, style: { display: "grid", gridTemplateColumns: "1fr 84px 64px 52px", gap: 4, padding: "7px 10px", borderBottom: `1px solid ${C.line}`, background: i % 2 ? "#FAF9F5" : "transparent", fontSize: 13 } }, /* @__PURE__ */ React.createElement("span", { style: { fontFamily: F.body, fontWeight: 600, overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap" } }, name), /* @__PURE__ */ React.createElement("span", { style: { fontFamily: F.mono, textAlign: "right" } }, p.maxW != null ? `${p.maxW}\xD7${p.maxWr || "\u2013"}` : p.maxR != null ? `\xD7${p.maxR}` : "\u2014"), /* @__PURE__ */ React.createElement("span", { style: { fontFamily: F.mono, textAlign: "right", color: C.blue } }, p.e1 != null ? p.e1 : "\u2014"), /* @__PURE__ */ React.createElement("span", { style: { fontFamily: F.mono, textAlign: "right", color: C.mut, fontSize: 11 } }, fmtD(p.e1d)))))), /* @__PURE__ */ React.createElement(Section, { title: "B\u0117gimai \xB7 HRV \xB7 Atsistatymas" }, /* @__PURE__ */ React.createElement("div", { style: { ...cardS, padding: 14, fontFamily: F.body, fontSize: 13, color: C.mut } }, "\u010Cia atsiras intervals.icu duomenys (b\u0117gimo km, HRV, ramyb\u0117s pulsas), kai prijungsi Garmin \u2192 intervals.icu."))), /* @__PURE__ */ React.createElement(Section, { title: "\u012Ekelti duomenis rankiniu b\u016Bdu" }, /* @__PURE__ */ React.createElement(
+      "textarea",
+      {
+        value: pasteTxt,
+        onChange: (e) => setPasteTxt(e.target.value),
+        placeholder: "\u012Eklijuok appso eksporto JSON (jei \u017Ei\u016Bri kitame \u012Frenginyje)\u2026",
+        rows: 3,
+        style: { width: "100%", fontFamily: F.mono, fontSize: 11, background: C.card, border: `1px solid ${C.line}`, borderRadius: 6, padding: 8, color: C.ink }
+      }
+    ), /* @__PURE__ */ React.createElement(
+      "button",
+      {
+        onClick: doPaste,
+        disabled: !pasteTxt.trim(),
+        style: { marginTop: 6, fontFamily: F.disp, fontWeight: 700, fontSize: 15, letterSpacing: ".05em", textTransform: "uppercase", background: C.ink, color: C.paper, border: "none", borderRadius: 7, padding: "10px 16px", cursor: "pointer", opacity: pasteTxt.trim() ? 1 : 0.4 }
+      },
+      "Rodyti"
+    )), /* @__PURE__ */ React.createElement("div", { style: { fontFamily: F.mono, fontSize: 10, color: C.ghost, textAlign: "center" } }, "\u0161altiniai: istorija.json + telefono appsas (", local.length, " \u012Fra\u0161.)")));
+  }
+  ReactDOM.createRoot(document.getElementById("root")).render(React.createElement(Dash));
+})();
+ }catch(e){ m('Klaida: '+e.message); console.error(e); }
+}).catch(function(e){ m('Nepavyko uzkrauti. Patikrink interneta ir atnaujink.'); console.error(e); });
+
+</script>
+</body></html>
