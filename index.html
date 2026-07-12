@@ -107,17 +107,8 @@ L(R).then(function(){return L(D);}).then(function(){
   const uid = () => Date.now().toString(36) + Math.random().toString(36).slice(2, 7);
   const todayISO = () => (/* @__PURE__ */ new Date()).toISOString().slice(0, 10);
   const fmtD = (d) => d ? d.slice(5).replace("-", ".") : "";
-  const blankFrom = (tpl) => tpl.exercises.map((e) => ({
-    id: e.id,
-    name: e.name,
-    pyramid: !!e.pyramid,
-    weight: "",
-    w: ["", "", "", ""],
-    r: ["", "", "", ""],
-    note: ""
-  }));
   const suggestFrom = (workouts, type) => {
-    const prev = workouts.filter((w) => w.type === type).sort((a, b) => a.date < b.date ? 1 : -1)[0];
+    const prev = workouts.filter((w) => w.type === type && !w.skippedAll).sort((a, b) => a.date < b.date ? 1 : -1)[0];
     if (prev) {
       const map2 = {};
       prev.exercises.forEach((e) => {
@@ -138,15 +129,31 @@ L(R).then(function(){return L(D);}).then(function(){
         note: ""
       };
     });
-    return { map, date: null, from: "\u0161ablonas" };
+    return { map, date: null, from: "pradiniai" };
   };
-  function Cell({ value, ghost, onChange, wide }) {
+  const draftFrom = (tpl, sug) => tpl.exercises.map((e) => {
+    const p = sug && sug.map[e.id] || {};
+    return {
+      id: e.id,
+      name: e.name,
+      pyramid: !!e.pyramid,
+      weight: p.weight != null ? p.weight : e.weight || "",
+      w: (p.w || e.w || ["", "", "", ""]).slice(0, 4),
+      r: (p.r || e.r || ["", "", "", ""]).slice(0, 4),
+      note: "",
+      confirmed: false,
+      // ar peržiūrėta/patvirtinta
+      skipped: false
+      // ar praleista
+    };
+  });
+  function Cell({ value, onChange, dim, disabled }) {
     return /* @__PURE__ */ React.createElement(
       "input",
       {
         value,
         onChange: (e) => onChange(e.target.value),
-        placeholder: ghost || "",
+        disabled,
         inputMode: "text",
         style: {
           width: "100%",
@@ -157,42 +164,54 @@ L(R).then(function(){return L(D);}).then(function(){
           textAlign: "center",
           padding: "9px 2px",
           minHeight: 40,
-          background: value ? C.card : "transparent",
+          background: disabled ? "transparent" : C.card,
           border: `1px solid ${C.line}`,
           borderRadius: 4,
-          color: C.ink,
+          color: disabled ? C.ghost : dim ? C.ghost : C.ink,
+          opacity: disabled ? 0.5 : 1,
           outlineColor: C.hi
         }
       }
     );
   }
-  function ExerciseRows({ ex, sug, onChange, onName }) {
-    const g = sug || {};
-    const label = {
-      fontFamily: F.body,
-      fontSize: 14,
-      fontWeight: 600,
-      color: C.ink,
-      padding: "6px 6px 6px 0",
-      lineHeight: 1.2
-    };
-    const sub = { fontFamily: F.mono, fontSize: 11, color: C.mut, fontWeight: 400 };
+  function ExerciseRows({ ex, prevTxt, onChange }) {
     const isNew = ex.name.startsWith("\u012Evesti");
+    const dim = !ex.confirmed;
+    const off = ex.skipped;
+    const touch = (patch) => onChange({ ...ex, ...patch, confirmed: true });
     const setR = (i, v) => {
       const r = [...ex.r];
       r[i] = v;
-      onChange({ ...ex, r });
+      touch({ r });
     };
     const setW = (i, v) => {
       const w = [...ex.w];
       w[i] = v;
-      onChange({ ...ex, w });
+      touch({ w });
     };
-    return /* @__PURE__ */ React.createElement("div", { style: { borderBottom: `1px solid ${C.line}`, padding: "8px 0" } }, /* @__PURE__ */ React.createElement("div", { style: { display: "grid", gridTemplateColumns: "1fr 74px", gap: 6, alignItems: "center" } }, isNew ? /* @__PURE__ */ React.createElement(
+    const chip = (on, col) => ({
+      fontFamily: F.disp,
+      fontSize: 12,
+      fontWeight: 600,
+      letterSpacing: ".04em",
+      textTransform: "uppercase",
+      cursor: "pointer",
+      background: on ? col : "transparent",
+      color: on ? C.paper : C.mut,
+      border: `1px solid ${on ? col : C.line}`,
+      borderRadius: 5,
+      padding: "4px 8px"
+    });
+    return /* @__PURE__ */ React.createElement("div", { style: {
+      borderBottom: `1px solid ${C.line}`,
+      padding: "9px 0",
+      background: ex.confirmed && !off ? "rgba(46,158,68,.05)" : "transparent",
+      opacity: off ? 0.45 : 1
+    } }, /* @__PURE__ */ React.createElement("div", { style: { display: "grid", gridTemplateColumns: "1fr 72px", gap: 6, alignItems: "center" } }, /* @__PURE__ */ React.createElement("div", null, isNew ? /* @__PURE__ */ React.createElement(
       "input",
       {
         value: ex.customName || "",
-        onChange: (e) => onName(e.target.value),
+        onChange: (e) => touch({ customName: e.target.value }),
         placeholder: ex.name,
         style: {
           fontFamily: F.body,
@@ -202,28 +221,34 @@ L(R).then(function(){return L(D);}).then(function(){
           background: "transparent",
           border: "none",
           borderBottom: `1px dashed ${C.line}`,
-          padding: "6px 0",
+          padding: "5px 0",
           width: "100%",
           outlineColor: C.hi
         }
       }
-    ) : /* @__PURE__ */ React.createElement("div", { style: label }, ex.name, ex.pyramid && /* @__PURE__ */ React.createElement("span", { style: sub }, " \xB7 piramid\u0117")), !ex.pyramid ? /* @__PURE__ */ React.createElement(
-      Cell,
+    ) : /* @__PURE__ */ React.createElement("div", { style: { fontFamily: F.body, fontSize: 14, fontWeight: 600, color: C.ink, lineHeight: 1.2 } }, ex.confirmed && !off && /* @__PURE__ */ React.createElement("span", { style: { color: C.green } }, "\u2713 "), ex.name, ex.pyramid && /* @__PURE__ */ React.createElement("span", { style: { fontFamily: F.mono, fontSize: 11, color: C.mut, fontWeight: 400 } }, " \xB7 piramid\u0117")), prevTxt && /* @__PURE__ */ React.createElement("div", { style: { fontFamily: F.mono, fontSize: 10, color: C.mut, marginTop: 2 } }, "praeit\u0105: ", prevTxt)), !ex.pyramid ? /* @__PURE__ */ React.createElement(Cell, { value: ex.weight, dim, disabled: off, onChange: (v) => touch({ weight: v }) }) : /* @__PURE__ */ React.createElement("div", { style: { fontFamily: F.mono, fontSize: 11, color: C.mut, textAlign: "center" } }, "\u017Er. \u2193")), /* @__PURE__ */ React.createElement("div", { style: { display: "grid", gridTemplateColumns: "40px repeat(4,1fr)", gap: 4, marginTop: 6, alignItems: "center" } }, /* @__PURE__ */ React.createElement("span", { style: { fontFamily: F.disp, fontSize: 11, fontWeight: 600, letterSpacing: ".05em", color: C.mut, textTransform: "uppercase" } }, "Kart."), [0, 1, 2, 3].map((i) => /* @__PURE__ */ React.createElement(Cell, { key: i, value: ex.r[i], dim, disabled: off, onChange: (v) => setR(i, v) }))), ex.pyramid && /* @__PURE__ */ React.createElement("div", { style: { display: "grid", gridTemplateColumns: "40px repeat(4,1fr)", gap: 4, marginTop: 4, alignItems: "center" } }, /* @__PURE__ */ React.createElement("span", { style: { fontFamily: F.disp, fontSize: 11, fontWeight: 600, letterSpacing: ".05em", color: C.mut, textTransform: "uppercase" } }, "Kg"), [0, 1, 2, 3].map((i) => /* @__PURE__ */ React.createElement(Cell, { key: i, value: ex.w[i], dim, disabled: off, onChange: (v) => setW(i, v) }))), /* @__PURE__ */ React.createElement("div", { style: { display: "flex", gap: 6, alignItems: "center", marginTop: 6 } }, /* @__PURE__ */ React.createElement(
+      "button",
       {
-        value: ex.weight,
-        ghost: g.weight || "kg",
-        onChange: (v) => onChange({ ...ex, weight: v })
-      }
-    ) : /* @__PURE__ */ React.createElement("div", { style: { ...sub, textAlign: "center" } }, "\u017Er. \u2193")), /* @__PURE__ */ React.createElement("div", { style: { display: "grid", gridTemplateColumns: "44px repeat(4, 1fr)", gap: 4, marginTop: 6, alignItems: "center" } }, /* @__PURE__ */ React.createElement("span", { style: { fontFamily: F.disp, fontSize: 12, fontWeight: 600, letterSpacing: ".06em", color: C.mut, textTransform: "uppercase" } }, "Kart."), [0, 1, 2, 3].map((i) => /* @__PURE__ */ React.createElement(Cell, { key: i, value: ex.r[i], ghost: g.r && g.r[i] || "", onChange: (v) => setR(i, v) }))), ex.pyramid && /* @__PURE__ */ React.createElement("div", { style: { display: "grid", gridTemplateColumns: "44px repeat(4, 1fr)", gap: 4, marginTop: 4, alignItems: "center" } }, /* @__PURE__ */ React.createElement("span", { style: { fontFamily: F.disp, fontSize: 12, fontWeight: 600, letterSpacing: ".06em", color: C.mut, textTransform: "uppercase" } }, "Kg"), [0, 1, 2, 3].map((i) => /* @__PURE__ */ React.createElement(Cell, { key: i, value: ex.w[i], ghost: g.w && g.w[i] || "", onChange: (v) => setW(i, v) }))), /* @__PURE__ */ React.createElement(
+        onClick: () => onChange({ ...ex, confirmed: !ex.confirmed, skipped: false }),
+        style: chip(ex.confirmed && !off, C.green)
+      },
+      ex.confirmed && !off ? "Padaryta" : "Patvirtinti"
+    ), /* @__PURE__ */ React.createElement(
+      "button",
+      {
+        onClick: () => onChange({ ...ex, skipped: !ex.skipped, confirmed: false }),
+        style: chip(off, C.red)
+      },
+      "Praleista"
+    ), /* @__PURE__ */ React.createElement(
       "input",
       {
         value: ex.note,
         onChange: (e) => onChange({ ...ex, note: e.target.value }),
         placeholder: "komentaras\u2026",
         style: {
-          width: "100%",
-          boxSizing: "border-box",
-          marginTop: 5,
+          flex: 1,
+          minWidth: 0,
           fontFamily: F.body,
           fontSize: 13,
           color: C.mut,
@@ -233,7 +258,7 @@ L(R).then(function(){return L(D);}).then(function(){
           outlineColor: C.hi
         }
       }
-    ));
+    )));
   }
   function App() {
     const [loaded, setLoaded] = React.useState(false);
@@ -276,30 +301,29 @@ L(R).then(function(){return L(D);}).then(function(){
       [workouts, draft && draft.type]
     );
     const start = (type) => {
+      const s = suggestFrom(workouts, type);
       setDraft({
         id: uid(),
         type,
         date: todayISO(),
         bodyweight: "",
-        exercises: blankFrom(TEMPLATES[type]),
-        notes: ""
+        exercises: draftFrom(TEMPLATES[type], s),
+        notes: "",
+        basedOn: s.date || null
       });
       setView("log");
     };
     const updEx = (i, next) => setDraft((d) => ({ ...d, exercises: d.exercises.map((e, k) => k === i ? next : e) }));
     const save = () => {
-      const clean = {
-        ...draft,
-        exercises: draft.exercises.map((e) => ({ ...e, name: e.customName || e.name })).filter((e) => e.weight || e.r.some(Boolean) || e.w.some(Boolean))
-      };
-      if (clean.exercises.length === 0) {
-        flash("Nieko ne\u012Fvesta");
+      const done = draft.exercises.filter((e) => !e.skipped).filter((e) => e.weight || e.r.some(Boolean) || e.w.some(Boolean)).map((e) => ({ ...e, name: e.customName || e.name }));
+      if (done.length === 0) {
+        flash("Nieko nepadaryta");
         return;
       }
-      setWorkouts((ws) => [clean, ...ws]);
+      setWorkouts((ws) => [{ ...draft, exercises: done }, ...ws]);
       setDraft(null);
       setView("history");
-      flash("I\u0161saugota");
+      flash(`I\u0161saugota (${done.length} pratimai)`);
     };
     const exportJson = React.useMemo(
       () => JSON.stringify({ app: "zurnalas", version: 2, exportedAt: (/* @__PURE__ */ new Date()).toISOString(), workouts }, null, 2),
@@ -363,16 +387,30 @@ L(R).then(function(){return L(D);}).then(function(){
           placeholder: "85",
           style: { width: "100%", boxSizing: "border-box", fontFamily: F.mono, fontSize: 15, padding: "9px 8px", background: C.card, border: `1px solid ${C.line}`, borderRadius: 6, color: C.ink, textAlign: "center" }
         }
-      ))), sug && /* @__PURE__ */ React.createElement("div", { style: { fontFamily: F.mono, fontSize: 11, color: C.mut, marginBottom: 8 } }, "Pilki skai\u010Diai = ", sug.from === "praeita" ? `praeita treniruot\u0117 (${fmtD(sug.date)})` : "pradiniai duomenys", ". Ra\u0161yk savo."), /* @__PURE__ */ React.createElement("div", { style: { display: "grid", gridTemplateColumns: "44px repeat(4, 1fr)", gap: 4, borderBottom: `2px solid ${C.ink}`, paddingBottom: 5, marginBottom: 4 } }, /* @__PURE__ */ React.createElement("span", null), ["P1", "P2", "P3", "P4"].map((h) => /* @__PURE__ */ React.createElement("span", { key: h, style: { fontFamily: F.disp, fontSize: 13, fontWeight: 700, letterSpacing: ".06em", color: C.ink, textAlign: "center" } }, h))), draft.exercises.map((ex, i) => /* @__PURE__ */ React.createElement(
-        ExerciseRows,
-        {
-          key: ex.id,
-          ex,
-          sug: sug && sug.map[ex.id],
-          onChange: (next) => updEx(i, next),
-          onName: (v) => updEx(i, { ...ex, customName: v })
-        }
-      )), /* @__PURE__ */ React.createElement(
+      ))), /* @__PURE__ */ React.createElement("div", { style: {
+        display: "flex",
+        justifyContent: "space-between",
+        alignItems: "center",
+        fontFamily: F.mono,
+        fontSize: 11,
+        color: C.mut,
+        borderTop: `1px solid ${C.line}`,
+        borderBottom: `1px solid ${C.line}`,
+        padding: "7px 2px",
+        marginBottom: 8
+      } }, /* @__PURE__ */ React.createElement("span", null, draft.basedOn ? `Pagal ${fmtD(draft.basedOn)}` : "Pradiniai skai\u010Diai", " \u2014 palikti = padaryta"), /* @__PURE__ */ React.createElement("span", { style: { color: C.ink } }, "\u2713 ", draft.exercises.filter((e) => e.confirmed && !e.skipped).length, " \xB7 ", /* @__PURE__ */ React.createElement("span", { style: { color: C.red } }, "\u2298 ", draft.exercises.filter((e) => e.skipped).length))), /* @__PURE__ */ React.createElement("div", { style: { display: "grid", gridTemplateColumns: "40px repeat(4, 1fr)", gap: 4, borderBottom: `2px solid ${C.ink}`, paddingBottom: 5, marginBottom: 4 } }, /* @__PURE__ */ React.createElement("span", null), ["P1", "P2", "P3", "P4"].map((h) => /* @__PURE__ */ React.createElement("span", { key: h, style: { fontFamily: F.disp, fontSize: 13, fontWeight: 700, letterSpacing: ".06em", color: C.ink, textAlign: "center" } }, h))), draft.exercises.map((ex, i) => {
+        const p = sug && sug.map[ex.id];
+        const prevTxt = p ? ex.pyramid ? p.r.map((r, k) => r || p.w && p.w[k] ? `${p.w && p.w[k] || "\u2013"}\xD7${r || "\u2013"}` : null).filter(Boolean).join(" ") : `${p.weight || "\u2013"} kg \xB7 ${p.r.filter(Boolean).join("/")}` : "";
+        return /* @__PURE__ */ React.createElement(
+          ExerciseRows,
+          {
+            key: ex.id,
+            ex,
+            prevTxt: draft.basedOn ? prevTxt : "",
+            onChange: (next) => updEx(i, next)
+          }
+        );
+      }), /* @__PURE__ */ React.createElement(
         "textarea",
         {
           value: draft.notes,
